@@ -5,7 +5,7 @@ class TestRainbowSDK {
     protected rainbowSDK: RainbowSDK;
 
     constructor() {
-        this.test()
+        this.test();
     }
 
     public async test(): Promise<void> {
@@ -20,9 +20,9 @@ class TestRainbowSDK {
             autoLogin: true,
             logLevel: LogLevelEnum.WARNING
         });
-
         // const sdk: RainbowSDK = RainbowSDK.getInstance();
     }
 }
 
+console.log("init");
 const testRainbowSDK = new TestRainbowSDK();
