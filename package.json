@@ -17,6 +17,7 @@
     "serve": "^14.2.4"
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.8.11",
     "dotenv": "^17.2.1",
     "rainbow-web-sdk": "^5.0.39-sts"
   }

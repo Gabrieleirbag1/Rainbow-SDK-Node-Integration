@@ -25,6 +25,7 @@ const copyStaticPlugin = {
 await esbuild.build({
     entryPoints: ['src/index.ts'],
     bundle: true,
+    platform: 'node',
     format: 'esm',
     outdir: 'dist',
     plugins: [copyStaticPlugin]
