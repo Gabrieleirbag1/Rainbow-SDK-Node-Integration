@@ -1,0 +1,23 @@
+{
+  "name": "rainbow-sdk-basic-integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node esbuild.js",
+    "serve": "serve ./dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.25.9",
+    "serve": "^14.2.4"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "rainbow-web-sdk": "^5.0.39-sts"
+  }
+}
