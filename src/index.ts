@@ -1,19 +1,16 @@
 import { JSDOM } from 'jsdom';
+import { LogLevelEnum, RainbowSDK } from 'rainbow-web-sdk';
+import config from '../config.json';
 
-// Create a jsdom instance with a basic HTML document
-const dom = new JSDOM(`<!DOCTYPE html><html><body></body></html>`, {
+const DOM = new JSDOM(`<!DOCTYPE html><html><body></body></html>`, {
     url: 'http://localhost'
 });
 
-// Set up globals required by the SDK
-(global as any).window = dom.window;
-(global as any).document = dom.window.document;
-(global as any).DOMParser = dom.window.DOMParser;
-(global as any).XMLSerializer = dom.window.XMLSerializer;
-(global as any).navigator = dom.window.navigator;
-
-import { LogLevelEnum, RainbowSDK } from 'rainbow-web-sdk';
-import config from '../config.json';
+(global as any).window = DOM.window;
+(global as any).document = DOM.window.document;
+(global as any).DOMParser = DOM.window.DOMParser;
+(global as any).XMLSerializer = DOM.window.XMLSerializer;
+(global as any).navigator = DOM.window.navigator;
 
 class TestRainbowSDK {
     protected rainbowSDK: RainbowSDK;
