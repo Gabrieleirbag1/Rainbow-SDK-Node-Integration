@@ -117,32 +117,6 @@ The debug configuration in launch.json is set up to:
 4. Select the **Launch Program** configuration.
 5. Click the green play button, or press F5 to start debugging.
 
-## Working with DOM APIs in Node.js
-
-If your project requires browser APIs in a Node.js environment:
-
-1. Install a DOM emulation library:
-   ```sh
-   npm install jsdom
-   # or
-   npm install @xmldom/xmldom
-   ```
-
-2. Set up the DOM environment before importing modules that depend on browser APIs:
-   ```typescript
-   import { JSDOM } from 'jsdom';
-
-   // Create DOM environment
-   const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
-   global.window = dom.window;
-   global.document = dom.window.document;
-   global.XMLSerializer = dom.window.XMLSerializer;
-   global.DOMParser = dom.window.DOMParser;
-   
-   // Now import modules that require DOM APIs
-   import { YourModule } from 'your-browser-dependent-module';
-   ```
-
 ## Summary
 
 - **Install dependencies:** `npm install`  
