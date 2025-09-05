@@ -1,46 +1,53 @@
 import { JSDOM } from 'jsdom';
-import { LogLevelEnum, RainbowSDK } from 'rainbow-web-sdk';
+import WebSocket from 'ws';
 import config from '../config.json';
 
+// 1) Create JSDOM and expose globals BEFORE importing rainbow-web-sdk
 const DOM = new JSDOM(`<!DOCTYPE html><html><body><p>Placeholder</p></body></html>`, {
     url: 'http://localhost'
 });
-console.log(DOM.window.document.querySelector("p").textContent);
+console.log(DOM.window.document.querySelector("p")?.textContent);
+
 // expose DOM globals
 global.window = DOM.window as any;
 global.document = DOM.window.document;
 global.DOMParser = DOM.window.DOMParser;
-global.XMLSerializer = DOM.window.XMLSerializer.bind(DOM.window);
+global.XMLSerializer = DOM.window.XMLSerializer;
 global.navigator = DOM.window.navigator;
 
-class TestRainbowSDK {
-    protected rainbowSDK: RainbowSDK;
+// extra polyfills used by strophe/webrtc in the web SDK
+(global as any).WebSocket = WebSocket;
+(global as any).Event = DOM.window.Event;
+(global as any).EventTarget = DOM.window.EventTarget;
+(global as any).self = global.window;
 
-    constructor() {
-        this.test();
-    }
+async function main() {
+    // 2) Import the SDK only after the environment is ready
+    const { RainbowSDK, LogLevelEnum } = await import('rainbow-web-sdk');
 
-    public async test(): Promise<void> {
-        console.log("test");
-        const div = global.document.createElement('div');
-        div.id = 'jsdom-test';
-        global.document.body.appendChild(div);
-        this.rainbowSDK = RainbowSDK.create({
-            appConfig: { 
-                server: config.RAINBOW_SERVER || 'demo.openrainbow.org', 
-                applicationId: config.RAINBOW_APP_ID || '',
-                secretKey: config.RAINBOW_SECRET_KEY || ''
-            },
-            plugins: [],
-            autoLogin: true,
-            logLevel: LogLevelEnum.WARNING
-        });
-    }
+    console.log("init");
+
+    // Example: getInstance (or use RainbowSDK.create({...}) if you prefer)
+    const sdk = RainbowSDK.getInstance();
+
+    // Or:
+    // const sdk = RainbowSDK.create({
+    //   appConfig: {
+    //     server: config.RAINBOW_SERVER || 'demo.openrainbow.org',
+    //     applicationId: config.RAINBOW_APP_ID || '',
+    //     secretKey: config.RAINBOW_SECRET_KEY || ''
+    //   },
+    //   plugins: [],
+    //   autoLogin: true,
+    //   logLevel: LogLevelEnum.WARNING
+    // });
+
+    // Keep your test code if needed
+    const div = global.document.createElement('div');
+    div.id = 'jsdom-test';
+    global.document.body.appendChild(div);
 }
 
-console.log("init");
-try {
-    const testRainbowSDK = new TestRainbowSDK();
-} catch (error) {
-    console.error("Error initializing TestRainbowSDK:", error);
-}
+main().catch((error) => {
+    console.error("Error initializing Rainbow SDK:", error);
+});
