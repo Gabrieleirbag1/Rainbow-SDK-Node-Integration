@@ -24,13 +24,14 @@ const copyStaticPlugin = {
 
 await esbuild.build({
     entryPoints: ['src/index.ts'],
-    bundle: true,
-    platform: 'node',
     // format: 'esm',
     // outdir: 'dist',
+    // entryPoints: ['src/stropheJsdom.ts'],
+    bundle: true,
+    platform: 'node',
     format: 'cjs',
-    outfile: 'dist/test.cjs',
-    external: ["jsdom"],
+    outfile: 'dist/index.cjs',
+    external: ["jsdom", "canvas"],
     plugins: [copyStaticPlugin]
 });
 
