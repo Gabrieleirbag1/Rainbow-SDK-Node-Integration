@@ -26,8 +26,11 @@ await esbuild.build({
     entryPoints: ['src/index.ts'],
     bundle: true,
     platform: 'node',
-    format: 'esm',
-    outdir: 'dist',
+    // format: 'esm',
+    // outdir: 'dist',
+    format: 'cjs',
+    outfile: 'dist/test.cjs',
+    external: ["jsdom"],
     plugins: [copyStaticPlugin]
 });
 
