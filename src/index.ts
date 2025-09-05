@@ -21,6 +21,9 @@ class TestRainbowSDK {
 
     public async test(): Promise<void> {
         console.log("test");
+        // const div = global.document.createElement('div');
+        // div.id = 'jsdom-test';
+        // global.document.body.appendChild(div);
         this.rainbowSDK = RainbowSDK.create({
             appConfig: { 
                 server: config.RAINBOW_SERVER || 'demo.openrainbow.org', 
@@ -40,3 +43,8 @@ try {
 } catch (error) {
     console.error("Error initializing TestRainbowSDK:", error);
 }
+
+// index.ts
+// import { Strophe } from "strophe.js";
+
+// console.log("Strophe.NS:", Strophe.NS);
