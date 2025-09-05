@@ -2,15 +2,16 @@ import { JSDOM } from 'jsdom';
 import { LogLevelEnum, RainbowSDK } from 'rainbow-web-sdk';
 import config from '../config.json';
 
-const DOM = new JSDOM(`<!DOCTYPE html><html><body></body></html>`, {
+const DOM = new JSDOM(`<!DOCTYPE html><html><body><p>Placeholder</p></body></html>`, {
     url: 'http://localhost'
 });
-
-(global as any).window = DOM.window;
-(global as any).document = DOM.window.document;
-(global as any).DOMParser = DOM.window.DOMParser;
-(global as any).XMLSerializer = DOM.window.XMLSerializer;
-(global as any).navigator = DOM.window.navigator;
+console.log(DOM.window.document.querySelector("p").textContent);
+// expose DOM globals
+global.window = DOM.window as any;
+global.document = DOM.window.document;
+global.DOMParser = DOM.window.DOMParser;
+global.XMLSerializer = DOM.window.XMLSerializer.bind(DOM.window);
+global.navigator = DOM.window.navigator;
 
 class TestRainbowSDK {
     protected rainbowSDK: RainbowSDK;
@@ -21,9 +22,9 @@ class TestRainbowSDK {
 
     public async test(): Promise<void> {
         console.log("test");
-        // const div = global.document.createElement('div');
-        // div.id = 'jsdom-test';
-        // global.document.body.appendChild(div);
+        const div = global.document.createElement('div');
+        div.id = 'jsdom-test';
+        global.document.body.appendChild(div);
         this.rainbowSDK = RainbowSDK.create({
             appConfig: { 
                 server: config.RAINBOW_SERVER || 'demo.openrainbow.org', 
@@ -43,8 +44,3 @@ try {
 } catch (error) {
     console.error("Error initializing TestRainbowSDK:", error);
 }
-
-// index.ts
-// import { Strophe } from "strophe.js";
-
-// console.log("Strophe.NS:", Strophe.NS);
