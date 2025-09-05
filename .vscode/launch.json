@@ -19,9 +19,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch ESM Script",
-      "program": "${workspaceFolder}/dist/index.js",
+      "program": "${workspaceFolder}/dist/index.cjs",
       "preLaunchTask": "npm: build",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.cjs"],
       "sourceMaps": true,
       // "stopOnEntry": false,
       "resolveSourceMapLocations": [

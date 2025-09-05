@@ -17,6 +17,7 @@
     "serve": "^14.2.4"
   },
   "dependencies": {
+    "node-localstorage": "^3.0.5",
     "rainbow-web-sdk": "^5.0.39-sts",
     "strophe.js": "^4.0.0-rc0"
   }

@@ -1,8 +1,10 @@
 import { JSDOM } from 'jsdom';
 import WebSocket from 'ws';
-import config from '../config.json';
+import { LocalStorage } from "node-localstorage";
+(global as any).localStorage = new LocalStorage("./scratch");
+import configuration from '../config.json';
 
-// 1) Create JSDOM and expose globals BEFORE importing rainbow-web-sdk
+// Create JSDOM and expose globals BEFORE importing rainbow-web-sdk
 const DOM = new JSDOM(`<!DOCTYPE html><html><body><p>Placeholder</p></body></html>`, {
     url: 'http://localhost'
 });
@@ -28,19 +30,19 @@ async function main() {
     console.log("init");
 
     // Example: getInstance (or use RainbowSDK.create({...}) if you prefer)
-    const sdk = RainbowSDK.getInstance();
+    // const sdk = RainbowSDK.getInstance();
 
     // Or:
-    // const sdk = RainbowSDK.create({
-    //   appConfig: {
-    //     server: config.RAINBOW_SERVER || 'demo.openrainbow.org',
-    //     applicationId: config.RAINBOW_APP_ID || '',
-    //     secretKey: config.RAINBOW_SECRET_KEY || ''
-    //   },
-    //   plugins: [],
-    //   autoLogin: true,
-    //   logLevel: LogLevelEnum.WARNING
-    // });
+    const sdk = RainbowSDK.create({
+      appConfig: {
+        server: configuration.RAINBOW_SERVER || 'demo.openrainbow.org',
+        applicationId: configuration.RAINBOW_APP_ID || '',
+        secretKey: configuration.RAINBOW_SECRET_KEY || ''
+      },
+      plugins: [],
+      autoLogin: true,
+      logLevel: LogLevelEnum.WARNING
+    });
 
     // Keep your test code if needed
     const div = global.document.createElement('div');
