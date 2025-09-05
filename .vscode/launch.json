@@ -4,7 +4,21 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch CommonJS Script",
+      "program": "${workspaceFolder}/dist/test.cjs",
+      "preLaunchTask": "npm: build",
+      "outFiles": ["${workspaceFolder}/dist/**/*.cjs"],
+      "sourceMaps": true,
+      // "stopOnEntry": false,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch ESM Script",
       "program": "${workspaceFolder}/dist/index.js",
       "preLaunchTask": "npm: build",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
