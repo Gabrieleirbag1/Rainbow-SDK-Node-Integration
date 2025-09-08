@@ -714,7 +714,7 @@ packages:
     engines: {node: '>=6'}
 
   rainbow-web-sdk@file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz:
-    resolution: {integrity: sha512-TbMzMAKl0rV1J/Q08uV6Ez425u7nYzl2atOrWCv3Rg2wFIEJuHGftGeJ0v6Qr/BReMrSEkotTt6uLSWUMkR49g==, tarball: file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz}
+    resolution: {integrity: sha512-PASkb4eaNpKOO7EDRMQ7AATVHdLrKhXsM033vC99kdPb/1kw7MmyTU1MZ7o/bkOtlMFoL++XSyWSzaF7IzyNbA==, tarball: file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz}
     version: 5.0.39-sts
 
   range-parser@1.2.0:
