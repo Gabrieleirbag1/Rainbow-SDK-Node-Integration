@@ -7,6 +7,7 @@ import {
   ConnectionState,
   RainbowSDK,
   RBEvent,
+  User,
 } from "rainbow-web-sdk/lib";
 
 // Create JSDOM and expose globals BEFORE importing rainbow-web-sdk
@@ -74,16 +75,20 @@ class NodeRainbowSDK {
 
     if (!userConnected) {
       try {
-        userConnected = await this.rainbowSDK.connectionService.logon(
-          user,
-          pwd,
-          true
-        );
+        this.rainbowSDK.connectionService.logon(user, pwd, true)
+          .then((connectedUser) => {
+            userConnected = connectedUser;
+            const users: User[] = this.getContacts();
+            console.log(`Found ${users.length} contacts`);
+            this.sendMessage(users[1], "singleton")
+          });
       } catch (error: any) {
         console.error(`[testAppli] ${error.message}`);
         return;
       }
     }
+
+
   }
 
   private connectionStateChangeHandler(event: RBEvent): void {
@@ -91,6 +96,27 @@ class NodeRainbowSDK {
     console.info(
       `[testAppli] onConnectionStateChange ${connectionState.state}`
     );
+  }
+
+  public getContacts(): User[] {
+    return this.rainbowSDK.userNetwork.getUsers();
+  }
+
+  private getConversationService(): any {
+    return this.rainbowSDK.conversationService;
+  }
+
+  private getConversation(user: User): Promise<any> {
+    const conversationService = this.getConversationService();
+    return conversationService.getConversation(user);
+  }
+
+  private async sendMessage(user: User, messageText: string): Promise<void> {
+    const conversation = await this.getConversation(user);
+
+    if (conversation) {
+      conversation.sendMessage(messageText);
+    }
   }
 }
 
