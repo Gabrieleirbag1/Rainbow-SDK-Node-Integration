@@ -7,7 +7,7 @@ import configuration from '../config.json';
 const DOM = new JSDOM(`<!DOCTYPE html><html><body><p>Placeholder</p></body></html>`, {
     url: 'http://localhost'
 });
-console.log(DOM.window.document.querySelector("p")?.textContent);
+// console.log(DOM.window.document.querySelector("p")?.textContent);
 
 // expose DOM globals
 window = DOM.window as any;
@@ -16,8 +16,10 @@ DOMParser = DOM.window.DOMParser;
 XMLSerializer = DOM.window.XMLSerializer;
 navigator = DOM.window.navigator;
 
-// extra polyfills used by strophe/webrtc in the web SDK
+// create localstorage for node
 localStorage = new LocalStorage("./scratch");
+
+// extra polyfills used by strophe/webrtc in the web SDK
 declare const WebSocket;
 Event = DOM.window.Event;
 EventTarget = DOM.window.EventTarget;
