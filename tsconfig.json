@@ -3,7 +3,7 @@
         "module": "ESNext",
         "target": "es2019",
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMaps": true,
         "resolveJsonModule": true,
         "esModuleInterop": true
     }

@@ -5,11 +5,11 @@
       "type": "node",
       "request": "launch",
       "name": "Launch CommonJS Script",
-      "program": "${workspaceFolder}/dist/test.cjs",
+      "program": "${workspaceFolder}/dist/index.cjs",
       "preLaunchTask": "npm: build",
       "outFiles": ["${workspaceFolder}/dist/**/*.cjs"],
       "sourceMaps": true,
-      // "stopOnEntry": false,
+      "stopOnEntry": false,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
         "!**/node_modules/**"
@@ -19,11 +19,11 @@
       "type": "node",
       "request": "launch",
       "name": "Launch ESM Script",
-      "program": "${workspaceFolder}/dist/index.cjs",
+      "program": "${workspaceFolder}/dist/index.js",
       "preLaunchTask": "npm: build",
-      "outFiles": ["${workspaceFolder}/dist/**/*.cjs"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
       "sourceMaps": true,
-      // "stopOnEntry": false,
+      "stopOnEntry": false,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
         "!**/node_modules/**"
