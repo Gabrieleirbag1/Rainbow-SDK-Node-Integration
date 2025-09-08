@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import WebSocket from 'ws';
 import { LocalStorage } from "node-localstorage";
 import configuration from '../config.json';
+import { RainbowSDK } from 'rainbow-web-sdk/lib';
 
 // Create JSDOM and expose globals BEFORE importing rainbow-web-sdk
 const DOM = new JSDOM(`<!DOCTYPE html><html><body><p>Placeholder</p></body></html>`, {
@@ -35,7 +36,7 @@ async function main() {
     // const sdk = RainbowSDK.getInstance();
 
     debugger;
-    const sdk = RainbowSDK.create({
+    const sdk: RainbowSDK = RainbowSDK.create({
       appConfig: {
         server: configuration.RAINBOW_SERVER || 'demo.openrainbow.org',
         applicationId: configuration.RAINBOW_APP_ID || '',
