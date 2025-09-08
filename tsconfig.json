@@ -1,14 +1,10 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "target": "es2019",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "inlineSources": true,
-        "sourceRoot": "/",
-        "declaration": true,
-        "declarationMap": true
+        "module": "ESNext",        // Use modern ECMAScript modules
+        "target": "es2019",        // Target ES2019 JavaScript features
+        "moduleResolution": "node", // Use Node.js-style module resolution
+        "sourceMap": true,         // Generate source maps for debugging
+        "resolveJsonModule": true,  // Enable importing JSON files
+        "esModuleInterop": true     // Better interoperability with CommonJS modules
     }
 }
