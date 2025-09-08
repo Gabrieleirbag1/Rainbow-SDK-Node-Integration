@@ -60,7 +60,7 @@ class NodeRainbowSDK {
       },
       plugins: [],
       autoLogin: true,
-      logLevel: LogLevelEnum.DEBUG,
+      logLevel: LogLevelEnum.WARNING,
     });
 
     this.rainbowSDK.connectionService.subscribe(
