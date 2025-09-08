@@ -8,12 +8,15 @@ importers:
 
   .:
     dependencies:
-      dotenv:
-        specifier: ^17.2.1
-        version: 17.2.2
+      node-localstorage:
+        specifier: ^3.0.5
+        version: 3.0.5
       rainbow-web-sdk:
-        specifier: ^5.0.39-sts
-        version: 5.0.39-sts
+        specifier: file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz
+        version: file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz
+      strophe.js:
+        specifier: ^4.0.0-rc0
+        version: 4.0.0-rc0(jsdom@25.0.1)(ws@8.18.3)
     devDependencies:
       esbuild:
         specifier: ^0.25.9
@@ -229,10 +232,6 @@ packages:
   '@zeit/schemas@2.36.0':
     resolution: {integrity: sha512-7kjMwcChYEzMKjeex9ZFXkt1AyNov9R5HZtjBKVsmVpw7pa7ZtlCGvCBC2vnnXctaYN+aRI61HjIqeetZW5ROg==}
 
-  abab@2.0.6:
-    resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
-    deprecated: Use your platform's native atob() and btoa() methods instead
-
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
@@ -420,10 +419,6 @@ packages:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
 
-  dotenv@17.2.2:
-    resolution: {integrity: sha512-Sf2LSQP+bOlhKWWyhFsn0UsfdK/kCWRv1iuA2gXAwt3dyNabr6QSj00I2V10pidqz69soatm9ZwZvpQMTIOd5Q==}
-    engines: {node: '>=12'}
-
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -557,6 +552,10 @@ packages:
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
+  imurmurhash@0.1.4:
+    resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
+    engines: {node: '>=0.8.19'}
+
   ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
 
@@ -665,9 +664,6 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
-  module-alias@2.2.3:
-    resolution: {integrity: sha512-23g5BFj4zdQL/b6tor7Ji+QY4pEfNH784BMslY9Qb0UnJWRAt+lQGLYmRaM0KDBwIG23ffEBELhZDP2rhi9f/Q==}
-
   moment-duration-format@2.3.2:
     resolution: {integrity: sha512-cBMXjSW+fjOb4tyaVHuaVE/A5TqkukDWiOfxxAjY+PEqmmBQlLwn+8OzwPiG3brouXKY5Un4pBjAeB6UToXHaQ==}
 
@@ -680,6 +676,10 @@ packages:
   negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
     engines: {node: '>= 0.6'}
+
+  node-localstorage@3.0.5:
+    resolution: {integrity: sha512-GCwtK33iwVXboZWYcqQHu3aRvXEBwmPkAMRBLeaX86ufhqslyUkLGsi4aW3INEfdQYpUB5M9qtYf3eHvAk2VBg==}
+    engines: {node: '>=0.12'}
 
   npm-run-path@4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
@@ -713,8 +713,9 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  rainbow-web-sdk@5.0.39-sts:
-    resolution: {integrity: sha512-BG/CLhynZvGY9ajkuxGZ7c0zFLO6uOCdVkexhb9sLVG/fnFc7HSNvk9ow5tDxLsTfgKIn+l2E7FyzQHeNGud/Q==}
+  rainbow-web-sdk@file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz:
+    resolution: {integrity: sha512-TbMzMAKl0rV1J/Q08uV6Ez425u7nYzl2atOrWCv3Rg2wFIEJuHGftGeJ0v6Qr/BReMrSEkotTt6uLSWUMkR49g==, tarball: file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz}
+    version: 5.0.39-sts
 
   range-parser@1.2.0:
     resolution: {integrity: sha512-kA5WQoNVo4t9lNx2kQNFCxKeBl5IbbSNBl1M/tLkw9WCn+hxNBAW5Qh8gdhs63CJnhjJ2zQWFoqPJP2sK1AV5A==}
@@ -783,6 +784,10 @@ packages:
   signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
 
+  signal-exit@4.1.0:
+    resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
+    engines: {node: '>=14'}
+
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -809,6 +814,17 @@ packages:
 
   strophe.js@3.1.1:
     resolution: {integrity: sha512-+NbO4OPh/l8fKucI2a6ER36AAZoS+NhmPdzbV+BIUFOnFCapmOj3OL5eLB+54kX2ThQ1nP4+XHI3ZrHVn+pjew==}
+
+  strophe.js@4.0.0-rc0:
+    resolution: {integrity: sha512-9j2hR/OsxFX1gmqcsxNOQySrUUju0blHAmGB5g5EcdlVjWn19u+xHKEoXt4Ft8VPBB9rQR0jvtQkAJPpqM9XTw==}
+    peerDependencies:
+      jsdom: '>=20.0.0'
+      ws: '>=8.0.0'
+    peerDependenciesMeta:
+      jsdom:
+        optional: true
+      ws:
+        optional: true
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -896,6 +912,10 @@ packages:
   wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
+
+  write-file-atomic@5.0.1:
+    resolution: {integrity: sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
   ws@8.18.3:
     resolution: {integrity: sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==}
@@ -1053,8 +1073,6 @@ snapshots:
     optional: true
 
   '@zeit/schemas@2.36.0': {}
-
-  abab@2.0.6: {}
 
   accepts@1.3.8:
     dependencies:
@@ -1238,8 +1256,6 @@ snapshots:
   delayed-stream@1.0.0:
     optional: true
 
-  dotenv@17.2.2: {}
-
   dunder-proto@1.0.1:
     dependencies:
       call-bind-apply-helpers: 1.0.2
@@ -1419,6 +1435,8 @@ snapshots:
 
   ieee754@1.2.1: {}
 
+  imurmurhash@0.1.4: {}
+
   ini@1.3.8: {}
 
   int64-buffer@0.1.10: {}
@@ -1522,8 +1540,6 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  module-alias@2.2.3: {}
-
   moment-duration-format@2.3.2: {}
 
   ms@2.0.0: {}
@@ -1532,6 +1548,10 @@ snapshots:
     optional: true
 
   negotiator@0.6.3: {}
+
+  node-localstorage@3.0.5:
+    dependencies:
+      write-file-atomic: 5.0.1
 
   npm-run-path@4.0.1:
     dependencies:
@@ -1559,10 +1579,9 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  rainbow-web-sdk@5.0.39-sts:
+  rainbow-web-sdk@file:../rainbow-web-client/projects/rainbow-web-sdk/rainbow-web-sdk-5.0.39-sts.tgz:
     dependencies:
       '@date-fns/tz': 1.4.1
-      abab: 2.0.6
       buffer: 6.0.3
       crypto-es: 2.1.0
       date-fns: 4.1.0
@@ -1570,7 +1589,6 @@ snapshots:
       jquery: 3.7.1
       jwt-decode: 4.0.0
       lodash-es: 4.17.21
-      module-alias: 2.2.3
       moment-duration-format: 2.3.2
       rxjs: 7.8.2
       strophe.js: 3.1.1
@@ -1665,6 +1683,8 @@ snapshots:
 
   signal-exit@3.0.7: {}
 
+  signal-exit@4.1.0: {}
+
   string-width@4.2.3:
     dependencies:
       emoji-regex: 8.0.0
@@ -1700,6 +1720,11 @@ snapshots:
       - canvas
       - supports-color
       - utf-8-validate
+
+  strophe.js@4.0.0-rc0(jsdom@25.0.1)(ws@8.18.3):
+    optionalDependencies:
+      jsdom: 25.0.1
+      ws: 8.18.3
 
   supports-color@7.2.0:
     dependencies:
@@ -1798,6 +1823,11 @@ snapshots:
       ansi-styles: 6.2.1
       string-width: 5.1.2
       strip-ansi: 7.1.0
+
+  write-file-atomic@5.0.1:
+    dependencies:
+      imurmurhash: 0.1.4
+      signal-exit: 4.1.0
 
   ws@8.18.3:
     optional: true
