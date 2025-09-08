@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "dev": "node dist/index.cjs --enable-source-maps",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node esbuild.js",
     "serve": "serve ./dist"
