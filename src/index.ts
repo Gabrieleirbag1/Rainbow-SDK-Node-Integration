@@ -1,9 +1,9 @@
 import { JSDOM } from "jsdom";
 import WebSocket from "ws";
+import { Image as CanvasImage } from "canvas";
 import { LocalStorage } from "node-localstorage";
 import configuration from "../config.json";
 import {
-  ConnectedUser,
   ConnectionState,
   RainbowSDK,
   RBEvent,
@@ -16,24 +16,30 @@ const DOM = new JSDOM(
     url: "http://localhost",
   }
 );
-// console.log(DOM.window.document.querySelector("p")?.textContent);
 
-// expose DOM globals
-window = DOM.window as any;
+// DOM globals
+(globalThis as any).window = DOM.window;
 document = DOM.window.document;
-DOMParser = DOM.window.DOMParser;
-XMLSerializer = DOM.window.XMLSerializer;
-navigator = DOM.window.navigator;
+globalThis.DOMParser = DOM.window.DOMParser;
+globalThis.XMLSerializer = DOM.window.XMLSerializer;
+globalThis.navigator = DOM.window.navigator;
 
-// create localstorage for node
-localStorage = new LocalStorage("./scratch");
+// Eventtarget
+globalThis.Event = DOM.window.Event;
+globalThis.EventTarget = DOM.window.EventTarget;
 
-// extra polyfills used by strophe/webrtc in the web SDK
-declare const WebSocket;
-Event = DOM.window.Event;
-EventTarget = DOM.window.EventTarget;
+// Localstorage
+globalThis.localStorage = new LocalStorage("./scratch");
 
+// Websocket
+(globalThis as any).WebSocket = WebSocket;
+
+// Image object
+(globalThis as any).Image = CanvasImage;
+
+// Global variables RainbowSDK
 globalThis.config = {};
+globalThis.version = "Nothing";
 
 class NodeRainbowSDK {
   protected rainbowSDK: RainbowSDK;
@@ -45,7 +51,6 @@ class NodeRainbowSDK {
       "rainbow-web-sdk"
     );
 
-    debugger;
     this.rainbowSDK = RainbowSDK.create({
       appConfig: {
         server: configuration.RAINBOW_SERVER || "demo.openrainbow.org",
@@ -62,7 +67,8 @@ class NodeRainbowSDK {
       ConnectionServiceEvents.RAINBOW_ON_CONNECTION_STATE_CHANGE
     );
 
-    let userConnected: ConnectedUser = await this.rainbowSDK.start();
+    // let userConnected: ConnectedUser = await this.rainbowSDK.start();
+    let userConnected = null;
     const user = configuration.RAINBOW_USER || "";
     const pwd = configuration.RAINBOW_PASSWORD || "";
 
@@ -86,7 +92,6 @@ class NodeRainbowSDK {
       `[testAppli] onConnectionStateChange ${connectionState.state}`
     );
   }
-
 }
 
 const sdk = new NodeRainbowSDK();
