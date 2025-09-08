@@ -30,6 +30,8 @@ await esbuild.build({
     bundle: true,
     platform: 'node',
     format: 'cjs',
+    sourcemap: true,
+    sourcesContent: true,
     outfile: 'dist/index.cjs',
     external: ["jsdom", "canvas"],
     plugins: [copyStaticPlugin]

@@ -7,13 +7,14 @@
       "name": "Launch CommonJS Script",
       "program": "${workspaceFolder}/dist/index.cjs",
       "preLaunchTask": "npm: build",
-      "outFiles": ["${workspaceFolder}/dist/**/*.cjs"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.cjs", "${workspaceFolder}/node_modules/**/*.js"],
       "sourceMaps": true,
       "stopOnEntry": false,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ]
+        "${workspaceFolder}/node_modules/**"
+      ],
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "type": "node",
@@ -21,13 +22,14 @@
       "name": "Launch ESM Script",
       "program": "${workspaceFolder}/dist/index.js",
       "preLaunchTask": "npm: build",
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js", "${workspaceFolder}/node_modules/**/*.js"],
       "sourceMaps": true,
       "stopOnEntry": false,
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ]
+        "${workspaceFolder}/node_modules/**"
+      ],
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

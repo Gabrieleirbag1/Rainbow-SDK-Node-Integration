@@ -3,8 +3,12 @@
         "module": "ESNext",
         "target": "es2019",
         "moduleResolution": "node",
-        "sourceMaps": true,
+        "sourceMap": true,
         "resolveJsonModule": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "inlineSources": true,
+        "sourceRoot": "/",
+        "declaration": true,
+        "declarationMap": true
     }
 }
