@@ -4,6 +4,7 @@ import { Image as CanvasImage } from "canvas";
 import { LocalStorage } from "node-localstorage";
 import configuration from "../config.json";
 import {
+  CallService,
   ConnectionState,
   RainbowSDK,
   RBEvent,
@@ -48,7 +49,7 @@ class NodeRainbowSDK {
   public async main() {
     console.log("init");
     // Import the SDK objects only after the environment is ready
-    const { RainbowSDK, LogLevelEnum, ConnectionServiceEvents } = await import(
+    const { RainbowSDK, LogLevelEnum, ConnectionServiceEvents, CallsPlugin } = await import(
       "rainbow-web-sdk"
     );
 
@@ -58,9 +59,9 @@ class NodeRainbowSDK {
         applicationId: configuration.RAINBOW_APP_ID || "",
         secretKey: configuration.RAINBOW_SECRET_KEY || "",
       },
-      plugins: [],
+      plugins: [CallsPlugin],
       autoLogin: true,
-      logLevel: LogLevelEnum.WARNING,
+      logLevel: LogLevelEnum.ERROR,
     });
 
     this.rainbowSDK.connectionService.subscribe(
@@ -81,14 +82,13 @@ class NodeRainbowSDK {
             const users: User[] = this.getContacts();
             console.log(`Found ${users.length} contacts`);
             this.sendMessage(users[1], "singleton")
+            this.makeAudioCall(users[1])
           });
       } catch (error: any) {
         console.error(`[testAppli] ${error.message}`);
         return;
       }
     }
-
-
   }
 
   private connectionStateChangeHandler(event: RBEvent): void {
@@ -118,6 +118,19 @@ class NodeRainbowSDK {
       conversation.sendMessage(messageText);
     }
   }
+
+  async getCallService(): Promise<CallService> {
+    const callService = this.rainbowSDK.callService as CallService;
+    console.log(callService)
+    return callService;
+  }
+
+  makeAudioCall(user: User): void {
+    this.getCallService().then(callService => {
+      callService.makeWebCall(user);
+    });
+  }
+
 }
 
 const sdk = new NodeRainbowSDK();
