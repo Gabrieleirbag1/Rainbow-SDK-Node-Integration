@@ -82,7 +82,7 @@ class NodeRainbowSDK {
             const users: User[] = this.getContacts();
             console.log(`Found ${users.length} contacts`);
             this.sendMessage(users[1], "singleton")
-            this.makeAudioCall(users[1])
+            // this.makeAudioCall(users[1])
           });
       } catch (error: any) {
         console.error(`[testAppli] ${error.message}`);
