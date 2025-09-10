@@ -33,7 +33,7 @@ await esbuild.build({
     sourcemap: true,
     sourcesContent: true,
     outfile: 'dist/index.cjs',
-    external: ["jsdom", "canvas"],
+    external: ["jsdom", "canvas", "@roamhq/wrtc"],
     plugins: [copyStaticPlugin]
 });
 
